@@ -30,11 +30,16 @@ public class ExamsContentProvider extends ContentProvider {
 
     public ExamsContentProvider() {
         super();
-        database= Me.getApplication().getDatabaseHelper().getWritableDatabase();
+    }
+
+    private void init() {
+        if(database==null)
+            database= Me.getApplication().getDatabaseHelper().getWritableDatabase();
     }
 
     @Override
     public int delete(Uri uri, String selection, String[] selectionArgs) {
+        init();
         return database.delete(Exam.TABLE, selection, selectionArgs);
     }
 
@@ -45,6 +50,7 @@ public class ExamsContentProvider extends ContentProvider {
 
     @Override
     public Uri insert(Uri uri, ContentValues values) {
+        init();
         long id=database.insert(Exam.TABLE, null, values);
         if(id==-1L)
             return null;
@@ -61,6 +67,7 @@ public class ExamsContentProvider extends ContentProvider {
     public Cursor query(Uri uri, String[] projection, String selection,
                         String[] selectionArgs, String sortOrder) {
         Cursor cursor=null;
+        init();
         switch (sUriMatcher.match(uri)) {
             case GET_EXAMS_LIST:
                 cursor = database.query(Exam.TABLE, projection, selection, selectionArgs, null, null, sortOrder);
@@ -79,6 +86,7 @@ public class ExamsContentProvider extends ContentProvider {
 
     @Override
     public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
+        init();
         return database.update(Exam.TABLE, values, selection, selectionArgs);
     }
 }
