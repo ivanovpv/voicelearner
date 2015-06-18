@@ -30,12 +30,11 @@ public class WordTopicsContentProvider extends ContentProvider {
 
     public WordTopicsContentProvider() {
         super();
-        database= Me.getApplication().getDatabaseHelper().getWritableDatabase();
     }
 
     private void init() {
         if(database==null)
-            database= Me.getApplication().getDatabaseHelper().getWritableDatabase();
+            database= Me.getApplication().getDatabaseHelper(this.getContext()).getWritableDatabase();
     }
 
 

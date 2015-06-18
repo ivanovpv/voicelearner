@@ -1,6 +1,7 @@
 package ru.ivanovpv.voicelearner;
 
 import android.app.Application;
+import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -19,14 +20,15 @@ public class Me extends Application {
 
     public void onCreate() {
         super.onCreate();
-        databaseHelper=new LearnerOpenHelper(this.getApplicationContext(), 1);
     }
 
     public static Me getApplication() {
         return me;
     }
 
-    public LearnerOpenHelper getDatabaseHelper() {
+    public LearnerOpenHelper getDatabaseHelper(Context context) {
+        if(databaseHelper==null)
+            databaseHelper=new LearnerOpenHelper(context, 1);
         return databaseHelper;
     }
 }

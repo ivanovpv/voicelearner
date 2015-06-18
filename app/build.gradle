@@ -32,9 +32,8 @@ def getVersionName = { ->
 android {
     compileSdkVersion 22
     buildToolsVersion '22.0.1'
-
     defaultConfig {
-        applicationId "voicelearner.ru.ivanovpv.voicelearner"
+        applicationId "ru.ivanovpv.voicelearner"
         minSdkVersion 19
         targetSdkVersion 22
         versionCode getVersionCode()

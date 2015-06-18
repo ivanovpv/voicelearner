@@ -34,7 +34,7 @@ public class ExamsContentProvider extends ContentProvider {
 
     private void init() {
         if(database==null)
-            database= Me.getApplication().getDatabaseHelper().getWritableDatabase();
+            database= Me.getApplication().getDatabaseHelper(this.getContext()).getWritableDatabase();
     }
 
     @Override
