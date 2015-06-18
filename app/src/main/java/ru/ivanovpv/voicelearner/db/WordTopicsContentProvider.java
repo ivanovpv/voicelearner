@@ -33,8 +33,15 @@ public class WordTopicsContentProvider extends ContentProvider {
         database= Me.getApplication().getDatabaseHelper().getWritableDatabase();
     }
 
+    private void init() {
+        if(database==null)
+            database= Me.getApplication().getDatabaseHelper().getWritableDatabase();
+    }
+
+
     @Override
     public int delete(Uri uri, String selection, String[] selectionArgs) {
+        init();
         return database.delete(WordTopic.TABLE, selection, selectionArgs);
     }
 
@@ -45,6 +52,7 @@ public class WordTopicsContentProvider extends ContentProvider {
 
     @Override
     public Uri insert(Uri uri, ContentValues values) {
+        init();
         long id=database.insert(Lesson.TABLE, null, values);
         if(id==-1L)
             return null;
@@ -60,6 +68,7 @@ public class WordTopicsContentProvider extends ContentProvider {
     @Override
     public Cursor query(Uri uri, String[] projection, String selection,
                         String[] selectionArgs, String sortOrder) {
+        init();
         Cursor cursor=null;
         switch (sUriMatcher.match(uri)) {
             case GET_TOPICS_LIST:
@@ -79,6 +88,7 @@ public class WordTopicsContentProvider extends ContentProvider {
 
     @Override
     public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
+        init();
         return database.update(WordTopic.TABLE, values, selection, selectionArgs);
     }
 }
