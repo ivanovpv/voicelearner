@@ -24,6 +24,7 @@ public class LearnerOpenHelper extends SQLiteOpenHelper {
             + Lesson.TABLE+"(\n"
             + Lesson._ID+" integer primary key autoincrement,\n"
             + Lesson.LESSON_NAME+" String not null,\n"
+            + Lesson.MAX_POINTS+" Integer\n"
             + ");";
 
     private static final String EXAMS_CREATE="create table if not exists\n"
@@ -84,6 +85,9 @@ public class LearnerOpenHelper extends SQLiteOpenHelper {
 
         // Path to the just created empty db
         File outFile = context.getDatabasePath(this.getDatabaseName());
+        Log.i(TAG, "outFile="+outFile.getPath());
+        if(!outFile.exists())
+            outFile.createNewFile();
 
         // Open the empty db as the output stream
         OutputStream myOutput = new FileOutputStream(outFile);
