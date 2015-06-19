@@ -1,5 +1,6 @@
 package ru.ivanovpv.voicelearner;
 
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -9,6 +10,7 @@ import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 public class VoiceLearnerActivity extends AppCompatActivity implements ExamsListFragment.OnFragmentInteractionListener, LessonsListFragment.OnFragmentInteractionListener {
 
@@ -36,14 +38,24 @@ public class VoiceLearnerActivity extends AppCompatActivity implements ExamsList
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.pager);
+        final FloatingActionButton fab=(FloatingActionButton )findViewById(R.id.fab);
+        if(mViewPager.getCurrentItem()==0)
+            fab.setVisibility(View.VISIBLE);
+        else
+            fab.setVisibility(View.GONE);
+
         mViewPager.setAdapter(mSectionsPagerAdapter);
-/*        mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             public void onPageScrollStateChanged(int state) {}
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}
 
             public void onPageSelected(int position) {
+                if(position==0)
+                    fab.setVisibility(View.VISIBLE);
+                else
+                    fab.setVisibility(View.GONE);
             }
-        });*/
+        });
     }
 
     @Override
