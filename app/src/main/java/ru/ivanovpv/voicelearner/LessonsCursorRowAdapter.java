@@ -20,7 +20,7 @@ public class LessonsCursorRowAdapter extends SimpleCursorAdapter {
     public LessonsCursorRowAdapter(Context context, int layout) {
         super(context, layout, null,
                 new String[] { Lesson.LESSON_NAME, Lesson.MAX_POINTS},
-                new int[] { R.id.lessonName, R.id.maxPoints}, 0
+                new int[] { R.id.lessonName, R.id.lessonMaxPoints}, 0
                 );
         this.layoutInflater = LayoutInflater.from(context);
         this.layout=layout;
@@ -31,7 +31,7 @@ public class LessonsCursorRowAdapter extends SimpleCursorAdapter {
         View view = layoutInflater.inflate(layout, null);
         ViewHolder viewHolder=new ViewHolder();
         viewHolder.lessonName=cursor.getColumnName(cursor.getColumnIndex(Lesson.LESSON_NAME));
-        viewHolder.maxPoints=cursor.getColumnName(cursor.getColumnIndex(Lesson.MAX_POINTS));
+        viewHolder.lessonMaxPoints=cursor.getColumnName(cursor.getColumnIndex(Lesson.MAX_POINTS));
         view.setTag(viewHolder);
         return view;
     }
@@ -41,12 +41,12 @@ public class LessonsCursorRowAdapter extends SimpleCursorAdapter {
         ViewHolder viewHolder=(ViewHolder )view.getTag();
         TextView tv=(TextView )view.findViewById(R.id.lessonName);
         tv.setText(viewHolder.lessonName);
-        tv=(TextView )view.findViewById(R.id.maxPoints);
-        tv.setText(viewHolder.maxPoints);
+        tv=(TextView )view.findViewById(R.id.lessonMaxPoints);
+        tv.setText(viewHolder.lessonMaxPoints);
     }
 
     static class ViewHolder {
         public String lessonName;
-        public String maxPoints;
+        public String lessonMaxPoints;
     }
 }

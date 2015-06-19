@@ -31,25 +31,37 @@ public class VoiceLearnerActivity extends AppCompatActivity implements ExamsList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
-
-
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mSectionsPagerAdapter);
+/*        mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            public void onPageScrollStateChanged(int state) {}
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}
 
+            public void onPageSelected(int position) {
+            }
+        });*/
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_studies, menu);
+        getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
     }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem menuItem = menu.findItem(R.id.action_new_lesson);
+        if(mViewPager.getCurrentItem()==0)
+            menuItem.setVisible(true);
+        else
+            menuItem.setVisible(false);
+        return true;
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -62,12 +74,11 @@ public class VoiceLearnerActivity extends AppCompatActivity implements ExamsList
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
     @Override
-    public void onFragmentInteraction(String id) {
+    public void onFragmentInteraction(long id) {
         Log.i("VoiceLearner", "Bingo, received id="+id);
     }
 

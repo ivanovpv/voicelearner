@@ -7,12 +7,12 @@ import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ArrayAdapter;
+import android.view.ViewGroup;
 import android.widget.ListView;
 
 import ru.ivanovpv.voicelearner.db.LessonsContentProvider;
-import ru.ivanovpv.voicelearner.dummy.DummyContent;
 
 /**
  * A fragment representing a list of Items.
@@ -64,6 +64,16 @@ public class LessonsListFragment extends ListFragment implements LoaderManager.L
 
 
     @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+//        View view = super.onCreateView(inflater, container, savedInstanceState);
+        View view = inflater.inflate(R.layout.lessons_list, container, false);
+        /*ListView listView= (ListView) view.findViewById(android.R.id.list);
+        listView.setOnItemClickListener(this);*/
+        return view;
+    }
+
+
+    @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         try {
@@ -87,7 +97,7 @@ public class LessonsListFragment extends ListFragment implements LoaderManager.L
         if (null != mListener) {
             // Notify the active callbacks interface (the activity, if the
             // fragment is attached to one) that an item has been selected.
-            mListener.onFragmentInteraction(DummyContent.ITEMS.get(position).id);
+            mListener.onFragmentInteraction(lessonsCursorRowAdapter.getItemId(position));
         }
     }
 
@@ -119,8 +129,7 @@ public class LessonsListFragment extends ListFragment implements LoaderManager.L
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        public void onFragmentInteraction(String id);
+        public void onFragmentInteraction(long id);
     }
 
 }

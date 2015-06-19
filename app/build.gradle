@@ -8,46 +8,32 @@ def getVersionCode = { ->
             commandLine 'git', 'rev-list', '--first-parent', '--count', 'master'
             standardOutput = stdout
         }
-        return Integer.parseInt(stdout.toString().trim())
+        println("Building revision #"+stdout)
+        return Integer.parseInt(stdout)
     }
     catch (ignored) {
-        return -1;
-    }
-}
-
-def getVersionName = { ->
-    try {
-        def stdout = new ByteArrayOutputStream()
-        exec {
-            commandLine 'git', 'describe', '--tags', '--dirty'
-            standardOutput = stdout
-        }
-        return stdout.toString().trim()
-    }
-    catch (ignored) {
-        return null;
+        return 0;
     }
 }
 
 android {
     compileSdkVersion 22
     buildToolsVersion '22.0.1'
+    lintOptions {
+        abortOnError false
+    }
     defaultConfig {
         applicationId "ru.ivanovpv.voicelearner"
         minSdkVersion 19
         targetSdkVersion 22
-        versionCode getVersionCode()
-        versionName getVersionName()
+        versionName = "0.0." + getVersionCode()
+        versionCode = 10000000 + getVersionCode() * 10
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
-    }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_6
-        targetCompatibility JavaVersion.VERSION_1_6
     }
 }
 
