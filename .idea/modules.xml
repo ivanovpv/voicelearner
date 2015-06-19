@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/VoiceLearner.iml" filepath="$PROJECT_DIR$/VoiceLearner.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/voicelearner.iml" filepath="$PROJECT_DIR$/voicelearner.iml" />
     </modules>
   </component>
 </project>
