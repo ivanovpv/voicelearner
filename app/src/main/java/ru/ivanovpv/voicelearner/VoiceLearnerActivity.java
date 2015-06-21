@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.os.Bundle;
@@ -85,12 +84,8 @@ public class VoiceLearnerActivity extends AppCompatActivity implements ExamsList
         int id = item.getItemId();
         switch(id) {
             case R.id.action_settings:
-                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                transaction.remove(mSectionsPagerAdapter.getItem(mViewPager.getCurrentItem()));
-                transaction.replace(R.id.idMain, new PrefsFragment());
-                transaction.addToBackStack(null);
-                transaction.commit();
-                fab.setVisibility(View.GONE);
+                Intent intent = new Intent(this, PrefsActivity.class);
+                this.startActivity(intent);
                 return true;
             case R.id.action_new_lesson:
                 addLesson();
