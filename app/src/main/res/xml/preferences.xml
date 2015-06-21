@@ -1,0 +1,31 @@
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:title="inline_preferences">
+
+        <CheckBoxPreference
+            android:key="checkbox_preference"
+            android:title="title_checkbox_preference"
+            android:summary="summary_checkbox_preference" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="preference_attributes">
+
+        <CheckBoxPreference
+            android:key="parent_checkbox_preference"
+            android:title="title_parent_preference"
+            android:summary="summary_parent_preference" />
+
+        <!-- The visual style of a child is defined by this styled theme attribute. -->
+        <CheckBoxPreference
+            android:key="child_checkbox_preference"
+            android:dependency="parent_checkbox_preference"
+            android:layout="?android:attr/preferenceLayoutChild"
+            android:title="title_child_preference"
+            android:summary="summary_child_preference" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

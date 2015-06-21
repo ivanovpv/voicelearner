@@ -1,9 +1,11 @@
 package ru.ivanovpv.voicelearner;
 
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -12,8 +14,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-public class VoiceLearnerActivity extends AppCompatActivity implements ExamsListFragment.OnFragmentInteractionListener, LessonsListFragment.OnFragmentInteractionListener {
-
+public class VoiceLearnerActivity extends AppCompatActivity implements ExamsListFragment.OnFragmentInteractionListener, LessonsListFragment.OnFragmentInteractionListener, View.OnClickListener {
+    private static final String TAG=VoiceLearnerActivity.class.getName();
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
      * fragments for each of the sections. We use a
@@ -23,6 +25,7 @@ public class VoiceLearnerActivity extends AppCompatActivity implements ExamsList
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
     SectionsPagerAdapter mSectionsPagerAdapter;
+    FloatingActionButton fab;
 
     /**
      * The {@link ViewPager} that will host the section contents.
@@ -38,11 +41,13 @@ public class VoiceLearnerActivity extends AppCompatActivity implements ExamsList
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.pager);
-        final FloatingActionButton fab=(FloatingActionButton )findViewById(R.id.fab);
+        fab=(FloatingActionButton )findViewById(R.id.fab);
         if(mViewPager.getCurrentItem()==0)
             fab.setVisibility(View.VISIBLE);
         else
             fab.setVisibility(View.GONE);
+        fab.setOnClickListener(this);
+
 
         mViewPager.setAdapter(mSectionsPagerAdapter);
         mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -77,14 +82,18 @@ public class VoiceLearnerActivity extends AppCompatActivity implements ExamsList
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch(id) {
+            case R.id.action_settings:
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                transaction.remove(mSectionsPagerAdapter.getItem(mViewPager.getCurrentItem()));
+                transaction.replace(R.id.idMain, new PrefsFragment());
+                transaction.addToBackStack(null);
+                transaction.commit();
+                fab.setVisibility(View.GONE);
+                return true;
+            case R.id.action_new_lesson:
+                addLesson();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -92,6 +101,15 @@ public class VoiceLearnerActivity extends AppCompatActivity implements ExamsList
     @Override
     public void onFragmentInteraction(long id) {
         Log.i("VoiceLearner", "Bingo, received id="+id);
+    }
+
+    @Override
+    public void onClick(View v) {
+        addLesson();
+    }
+
+    private void addLesson() {
+        Log.i(TAG, "Add lesson");
     }
 
 
