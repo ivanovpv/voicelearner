@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/VoiceLearner.iml" filepath="$PROJECT_DIR$/VoiceLearner.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/android-support-v4-preferencefragment-master/android-support-v4-preferencefragment-master.iml" filepath="$PROJECT_DIR$/app/android-support-v4-preferencefragment-master/android-support-v4-preferencefragment-master.iml" />
+      <module fileurl="file://$PROJECT_DIR$/libs/android-support-v4-preferencefragment-master/android-support-v4-preferencefragment-master.iml" filepath="$PROJECT_DIR$/libs/android-support-v4-preferencefragment-master/android-support-v4-preferencefragment-master.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
